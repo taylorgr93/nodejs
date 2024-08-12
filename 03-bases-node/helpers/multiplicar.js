@@ -1,27 +1,31 @@
 // multiplicar.js
-const { writeFile, writeFileSync } = require("node:fs");
+const { writeFileSync } = require("node:fs");
+const colors = require("colors");
 
-const crearArchivo = (base = 5) => {
+// si coloco async en la funcion devuelvo una promesa
+const crearArchivo = async (base = 5, listar = false, hasta = 10) => {
   try {
     const fileName = `tabla-${base}.txt`;
 
-    console.log("====================");
-    console.log(`  Tabla del : ${base}  `);
-    console.log("====================");
-
     let salida = "";
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= hasta; i++) {
       salida += `${base} x ${i} = ${base * i}\n`;
     }
 
-    console.log(salida);
+    if (listar) {
+      console.log("====================");
+      console.log(colors.red.underline(`   Tabla del : ${base}   `));
+      console.log("====================");
+      console.log(colors.rainbow(salida));
+    }
 
-    writeFileSync(`tabla-${base}.txt`, salida);
-    console.log(`tabla-${base}.txt creado`);
+    writeFileSync(fileName, salida);
+    // console.log(`tabla-${base}.txt creado`);
 
     return fileName;
   } catch (err) {
+    console.error(err);
     return err;
   }
 };
