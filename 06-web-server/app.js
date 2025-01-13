@@ -20,7 +20,10 @@ app.use(express.static("public"));
 // });
 
 app.get("/", function (req, res) {
-  res.render("home");
+  res.render("home", {
+    nombre: "Christopher Taylor",
+    titulo: "Curso de Node",
+  });
 });
 
 app.get("/generic", function (req, res) {
