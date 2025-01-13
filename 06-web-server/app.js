@@ -1,9 +1,11 @@
+const hbs = require("hbs");
 const express = require("express");
 const app = express();
 const port = 8080;
 
-// TODO: require('hbs');
+// handlebars
 app.set("view engine", "hbs");
+hbs.registerPartials(__dirname + "/views/partials", function (err) {});
 
 // app.use(express.json()); // Middleware para parsear JSON
 
@@ -27,11 +29,19 @@ app.get("/", function (req, res) {
 });
 
 app.get("/generic", function (req, res) {
-  res.sendFile(__dirname + "/public/back/template/generic.html");
+  // res.sendFile(__dirname + "/public/back/template/generic.html");
+  res.render("generic", {
+    nombre: "Christopher Taylor",
+    titulo: "Curso de Node",
+  });
 });
 
 app.get("/elements", function (req, res) {
-  res.sendFile(__dirname + "/public/back/template/elements.html");
+  // res.sendFile(__dirname + "/public/back/template/elements.html");
+  res.render("elements", {
+    nombre: "Christopher Taylor",
+    titulo: "Curso de Node",
+  });
 });
 
 app.get("/*", function (req, res) {
