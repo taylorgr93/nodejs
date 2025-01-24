@@ -1,6 +1,6 @@
 // server.js
-
 const express = require("express");
+const cors = require("cors");
 
 /**
  * Clase Server:
@@ -24,6 +24,8 @@ class Server {
    */
   middlewares() {
     // Directorio público:
+    this.app.use(cors());
+
     // Ofrece archivos estáticos desde la carpeta "public".
     this.app.use(express.static("public"));
   }
