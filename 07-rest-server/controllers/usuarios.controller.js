@@ -1,9 +1,12 @@
 const { response } = require("express");
 
 const usuariosGet = (req, res = response) => {
+  const { query } = req;
+
   res.status(200).json({
     status: "ok",
     msg: "get API - controlador",
+    query,
   });
 };
 
@@ -25,9 +28,13 @@ const usuariosPatch = (req, res = response) => {
 };
 
 const usuariosPut = (req, res = response) => {
+  const { body, params } = req;
+  const { id } = params;
+
   res.status(200).json({
     status: "ok",
     msg: "put API - controlador",
+    id,
   });
 };
 

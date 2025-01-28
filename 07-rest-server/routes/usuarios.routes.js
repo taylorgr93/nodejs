@@ -9,11 +9,11 @@ const {
 
 const router = Router();
 
+router.get("/", usuariosGet).post("/", usuariosPost);
+
 router
-  .get("/", usuariosGet)
-  .post("/", usuariosPost)
-  .patch("/", usuariosPatch)
-  .put("/", usuariosPut)
-  .delete("/", usuariosDelete);
+  .patch("/:id", usuariosPatch)
+  .put("/:id", usuariosPut)
+  .delete("/:id", usuariosDelete);
 
 module.exports = router;
