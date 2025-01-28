@@ -27,6 +27,9 @@ class Server {
     // Directorio público:
     this.app.use(cors());
 
+    // Lectura y parseo del body
+    this.app.use(express.json());
+
     // Ofrece archivos estáticos desde la carpeta "public".
     this.app.use(express.static("public"));
   }
