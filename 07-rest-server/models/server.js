@@ -12,6 +12,7 @@ class Server {
     this.app = express();
     // Lee el puerto desde las variables de entorno
     this.port = process.env.PORT;
+    this.usuariosPath = "/api/usuarios";
 
     // Llama a los métodos de configuración
     this.middlewares(); // Configuración de middlewares
@@ -37,40 +38,7 @@ class Server {
   routes() {
     // Ruta de ejemplo en "/api":
     // Retorna un mensaje de "Hello world" cuando se accede a "/api".
-    this.app.get("/api", (req, res) => {
-      res.json({
-        status: "ok",
-        msg: "get API",
-      });
-    });
-
-    this.app.post("/api", (req, res) => {
-      res.json({
-        status: "ok",
-        msg: "post API",
-      });
-    });
-
-    this.app.patch("/api", (req, res) => {
-      res.json({
-        status: "ok",
-        msg: "patch API",
-      });
-    });
-
-    this.app.put("/api", (req, res) => {
-      res.json({
-        status: "ok",
-        msg: "put API",
-      });
-    });
-
-    this.app.delete("/api", (req, res) => {
-      res.json({
-        status: "ok",
-        msg: "delete API",
-      });
-    });
+    this.app.use(this.usuariosPath, require("../routes/usuarios.routes"));
   }
 
   /**
