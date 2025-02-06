@@ -8,6 +8,7 @@ const {
   usuariosDelete,
 } = require("../controllers/usuarios.controller");
 const { validatCampos } = require("../middlewares/validar-campos");
+const Role = require("../models/role");
 
 const router = Router();
 
@@ -19,7 +20,13 @@ router.get("/", usuariosGet).post(
     check("password", "El password debe de ser de 6 letras").isLength({
       min: 6,
     }),
-    check("role", "No es un rol válido").isIn(["ADMIN_ROLE", "USER_ROLE"]),
+    // check("role", "No es un rol válido").isIn(["ADMIN_ROLE", "USER_ROLE"]),
+    check("role").custom(async (role) => {
+      const roleExist = await Role.findOne({ role });
+      if (!roleExist) {
+        throw new Error(`El rol ${role} no es válido`);
+      }
+    }),
     validatCampos,
   ],
   usuariosPost
