@@ -33,4 +33,10 @@ const UsuarioSchema = Schema({
   },
 });
 
+// Sobrescribimos el método toJSON para ocultar la contraseña y otros campos que no deseamos enviar.
+UsuarioSchema.methods.toJSON = function () {
+  const { __v, password, ...usuario } = this.toObject();
+  return usuario;
+};
+
 module.exports = model("Usuario", UsuarioSchema);
